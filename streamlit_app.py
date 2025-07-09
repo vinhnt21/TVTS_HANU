@@ -45,7 +45,7 @@ def add_documents_to_vectorstore(documents: List[Document], index_name: str) -> 
 def main():
     st.set_page_config(
         page_title="Chatbot Tư Vấn Tuyển Sinh HANU",
-        page_icon="🎓",
+        page_icon="static/logo.png",
         layout="wide"
     )
     
@@ -81,8 +81,14 @@ def main():
     </style>
     """, unsafe_allow_html=True)
     
-    # Header
-    st.title("🎓 Chatbot Tư Vấn Tuyển Sinh Đại Học Hà Nội (HANU)")
+    # Header with logo
+    col_logo, col_title = st.columns([1, 8])
+    with col_logo:
+        st.image("static/logo.png", width=80)
+    with col_title:
+        st.title("Đại Học Hà Nội (HANU)")
+        st.subheader("Chatbot Tư Vấn Tuyển Sinh")
+    
     st.markdown("---")
     
     # Sidebar for document upload
@@ -145,38 +151,70 @@ def main():
             with st.expander(f"📚 {config.human_description}"):
                 st.write(f"**Tên index:** {config.pinecone_index_name}")
                 st.write(f"**Mô tả:** {config.tool_description}")
-
-    # Main chat interface
-    col1, col2 = st.columns([2, 1])
-    
-    with col1:
-        st.header("💬 Trò Chuyện")
         
-        # Initialize chat history
-        if "messages" not in st.session_state:
+        st.markdown("---")
+        
+        # Usage instructions moved to sidebar
+        st.subheader("🛠️ Hướng Dẫn Sử Dụng")
+        
+        with st.expander("📖 Cách sử dụng"):
+            st.markdown("""
+            **Trò chuyện:**
+            - Nhập câu hỏi vào ô chat
+            - Bot sẽ tìm kiếm thông tin và trả lời bạn
+            
+            **Thêm tài liệu:**
+            - Chọn cơ sở dữ liệu phù hợp
+            - Tải file .txt lên
+            - Nhấn "Thêm Tài Liệu"
+            
+            **Lưu ý:**
+            - Chỉ hỗ trợ file .txt
+            - Tài liệu sẽ được tự động chia nhỏ
+            """)
+        
+        with st.expander("❓ Các câu hỏi mẫu"):
+            st.markdown("""
+            - Thông tin tuyển sinh HANU 2025?
+            - Học phí của HANU là bao nhiêu?
+            - Trường HANU có những ngành nào?
+            - Lịch sử hình thành của HANU?
+            - Có hỗ trợ học bổng nào?
+            """)
+        
+        # Clear chat button
+        if st.button("🗑️ Xóa Lịch Sử Chat", type="secondary"):
             st.session_state.messages = []
-            # Add welcome message
-            welcome_msg = """
-            Xin chào! Tôi là chatbot tư vấn tuyển sinh của Đại học Hà Nội (HANU). 
-            
-            Tôi có thể giúp bạn tìm hiểu về:
-            - 🏫 Thông tin giới thiệu về trường
-            - 📋 Thông tin tuyển sinh năm 2025  
-            - 📚 Lịch sử của trường
-            - 💰 Học phí và hỗ trợ học bổng
-            
-            Hãy đặt câu hỏi để tôi có thể hỗ trợ bạn!
-            """
-            st.session_state.messages.append({"role": "assistant", "content": welcome_msg})
-        
-        # Create a container for chat messages with scroll
-        chat_container = st.container()
-        with chat_container:
-            # Display chat messages
-            for message in st.session_state.messages:
-                with st.chat_message(message["role"]):
-                    st.markdown(message["content"])
+            st.rerun()
+
+    # Main chat interface - now full width
+    st.header("💬 Trò Chuyện")
     
+    # Initialize chat history
+    if "messages" not in st.session_state:
+        st.session_state.messages = []
+        # Add welcome message
+        welcome_msg = """
+        Xin chào! Tôi là chatbot tư vấn tuyển sinh của Đại học Hà Nội (HANU). 
+        
+        Tôi có thể giúp bạn tìm hiểu về:
+        - 🏫 Thông tin giới thiệu về trường
+        - 📋 Thông tin tuyển sinh năm 2025  
+        - 📚 Lịch sử của trường
+        - 💰 Học phí và hỗ trợ học bổng
+        
+        Hãy đặt câu hỏi để tôi có thể hỗ trợ bạn!
+        """
+        st.session_state.messages.append({"role": "assistant", "content": welcome_msg})
+    
+    # Create a container for chat messages with scroll
+    chat_container = st.container()
+    with chat_container:
+        # Display chat messages
+        for message in st.session_state.messages:
+            with st.chat_message(message["role"]):
+                st.markdown(message["content"])
+
     # Chat input - placed outside columns to be full width and sticky
     if prompt := st.chat_input("Nhập câu hỏi của bạn..."):
         # Add user message to chat history
@@ -195,40 +233,6 @@ def main():
         
         # Rerun to show new messages
         st.rerun()
-    
-    with col2:
-        st.header("🛠️ Hướng Dẫn Sử Dụng")
-        
-        with st.expander("📖 Cách sử dụng"):
-            st.markdown("""
-            **Trò chuyện:**
-            - Nhập câu hỏi vào ô chat bên trái
-            - Bot sẽ tìm kiếm thông tin và trả lời bạn
-            
-            **Thêm tài liệu:**
-            - Chọn cơ sở dữ liệu phù hợp ở sidebar
-            - Tải file .txt lên
-            - Nhấn "Thêm Tài Liệu"
-            
-            **Lưu ý:**
-            - Chỉ hỗ trợ file .txt
-            - Tài liệu sẽ được tự động chia nhỏ
-            - Chọn đúng cơ sở dữ liệu cho từng loại thông tin
-            """)
-        
-        with st.expander("❓ Các câu hỏi mẫu"):
-            st.markdown("""
-            - Thông tin tuyển sinh HANU 2025 như thế nào?
-            - Học phí của HANU là bao nhiêu?
-            - Trường HANU có những ngành nào?
-            - Lịch sử hình thành và phát triển của HANU?
-            - Có những hình thức hỗ trợ học bổng nào?
-            """)
-        
-        # Clear chat button
-        if st.button("🗑️ Xóa Lịch Sử Chat", type="secondary"):
-            st.session_state.messages = []
-            st.rerun()
 
 if __name__ == "__main__":
     main() 
