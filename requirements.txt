@@ -1,0 +1,10 @@
+streamlit
+langchain
+langchain-openai
+langchain-pinecone
+langchain-core
+langchain-unstructured
+langgraph
+pinecone-client
+unstructured
+openai 
