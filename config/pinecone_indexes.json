@@ -1,22 +1,7 @@
 [
   {
-    "name": "retrieve-thong-tin-chung",
-    "description": "Tìm kiếm và trả về thông tin giới thiệu về trường đại học Hà Nội (HANU)",
-    "description_for_human":"Nơi lưu trữ thông tin giới thiệu về trường đại học Hà Nội (HANU)"
-  },
-  {
-    "name": "retrieve-thong-tin-tuyen-sinh",
-    "description": "Tìm kiếm và trả về thông tin tuyển sinh năm 2025",
-    "description_for_human":"Nơi lưu trữ thông tin tuyển sinh năm 2025"
-  },
-  {
-    "name": "retrieve-thong-tin-lich-su",
-    "description": "Tìm kiếm và trả về thông tin lịch sử của trường đại học Hà Nội (HANU)",
-    "description_for_human":"Nơi lưu trữ thông tin lịch sử của trường đại học Hà Nội (HANU)"
-  },
-  {
-    "name": "retrieve-thong-tin-tai-chinh",
-    "description": "Tìm kiếm và trả về thông tin học phí, phí sinh hoạt, và các khoản chi phí khác hoặc hỗ trợ học bổng của trường đại học Hà Nội (HANU)",  
-    "description_for_human":"Nơi lưu trữ thông tin học phí, phí sinh hoạt, và các khoản chi phí khác hoặc hỗ trợ học bổng của trường đại học Hà Nội (HANU)"
+    "name": "retrieve-thong-tin-tuyen-sinh-hanu",
+    "description": "Tìm kiếm và trả về mọi thông tin về trường đại học Hà Nội (HANU) bao gồm: thông tin giới thiệu, tuyển sinh, lịch sử, học phí, học bổng và các thông tin khác",
+    "description_for_human": "Nơi lưu trữ toàn bộ thông tin về trường đại học Hà Nội (HANU)"
   }
 ]

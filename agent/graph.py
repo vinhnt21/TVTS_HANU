@@ -46,7 +46,10 @@ def _create_retriever_tools() -> List:
                 log.warning(f"LangChain vector store not found for index: {tool_config.pinecone_index_name}")
                 continue
                 
-            document_retriever = langchain_vector_store.as_retriever()
+            document_retriever = langchain_vector_store.as_retriever(
+                k=10,  # Number of documents to retrieve
+                score_threshold=0.5,  # Minimum similarity score to consider a document relevant
+            )
             retriever_tool = create_retriever_tool(
                 retriever=document_retriever,
                 name=tool_config.tool_name,

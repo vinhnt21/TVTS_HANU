@@ -5,6 +5,7 @@ from utils import log
 from pinecone import Pinecone, ServerlessSpec
 from langchain_core.documents import Document
 from langchain_unstructured import UnstructuredLoader
+from langchain.text_splitter import RecursiveCharacterTextSplitter
 from unstructured.cleaners.core import clean_extra_whitespace
 from typing import List, Dict
 
@@ -91,9 +92,21 @@ def load_document_and_chunk(file_path: str) -> List[Document]:
         
         document_loader = UnstructuredLoader(
             file_path, 
-            post_processors=[clean_extra_whitespace]
+            post_processors=[clean_extra_whitespace],   
         )
-        document_chunks = document_loader.load()
+        
+        documents = document_loader.load()
+        
+        full_text = " ".join([doc.page_content for doc in documents])
+        documents = [Document(page_content=full_text, metadata={"source": file_path})]
+        
+        text_splitter = RecursiveCharacterTextSplitter(
+            chunk_size=CONFIG.CHUNK_SIZE,      # Kích thước tối đa của mỗi chunk (tính bằng ký tự)
+            chunk_overlap=CONFIG.CHUNK_OVERLAP,    # Số ký tự chồng lấn giữa các chunk liên tiếp
+            length_function=len,
+            is_separator_regex=False,
+        )
+        document_chunks = text_splitter.split_documents(documents)
         
         log.success(f"Successfully loaded {len(document_chunks)} document chunks from {file_path}")
         return document_chunks

@@ -4,13 +4,13 @@
 
 ## 📖 Tổng Quan
 
-Hệ thống chatbot này sử dụng kiến trúc RAG tiên tiến với LangGraph để cung cấp thông tin tuyển sinh chính xác và cập nhật. Bot có khả năng tự động tìm kiếm, đánh giá và tổng hợp thông tin từ nhiều nguồn dữ liệu chuyên biệt.
+Hệ thống chatbot này sử dụng kiến trúc RAG tiên tiến với LangGraph để cung cấp thông tin tuyển sinh chính xác và cập nhật. Bot có khả năng tự động tìm kiếm, đánh giá và tổng hợp thông tin từ cơ sở dữ liệu tổng hợp về trường HANU.
 
 ## 🚀 Tính Năng Nổi Bật
 
 - **🤖 Intelligent RAG Workflow**: Sử dụng LangGraph để xây dựng luồng xử lý thông minh
 - **💬 Giao Diện Chat Thân Thiện**: Interface Streamlit hiện đại và responsive
-- **🔍 Multi-Database Search**: Tìm kiếm thông minh trên 4 cơ sở dữ liệu chuyên biệt
+- **🔍 Smart Search**: Tìm kiếm thông minh trên cơ sở dữ liệu tổng hợp
 - **📚 Document Management**: Upload và quản lý tài liệu .txt tự động
 - **🎯 Smart Question Rewriting**: Tự động cải thiện câu hỏi để tìm kiếm hiệu quả hơn
 - **⚡ Real-time Processing**: Xử lý và trả lời câu hỏi theo thời gian thực
@@ -41,17 +41,11 @@ flowchart TD
     G --> K["📝 Trả lời cho người dùng"]
     H --> K
     
-    subgraph "📊 4 Cơ sở dữ liệu Pinecone"
-        L["🏫 Thông tin chung<br/>về HANU"]
-        M["📋 Thông tin<br/>tuyển sinh 2025"]
-        N["📚 Lịch sử<br/>trường HANU"]
-        O["💰 Học phí &<br/>học bổng"]
+    subgraph "📊 Cơ sở dữ liệu Pinecone"
+        L["🎓 Toàn bộ thông tin<br/>về HANU"]
     end
     
     D -.-> L
-    D -.-> M
-    D -.-> N
-    D -.-> O
     
     style A fill:#e1f5fe
     style K fill:#e8f5e8
@@ -63,21 +57,18 @@ flowchart TD
 ### Giải Thích Các Bước:
 
 1. **📝 Question Analysis**: LLM phân tích câu hỏi và quyết định có cần tìm kiếm tài liệu hay trả lời trực tiếp
-2. **🔍 Document Retrieval**: Sử dụng retrieval tools để tìm kiếm trong 4 databases Pinecone
+2. **🔍 Document Retrieval**: Sử dụng retrieval tools để tìm kiếm trong database Pinecone
 3. **⚖️ Document Evaluation**: Đánh giá mức độ liên quan của tài liệu tìm được với câu hỏi
 4. **✏️ Question Rewriting**: Nếu tài liệu không liên quan, tự động viết lại câu hỏi (tối đa 1 lần)
 5. **💬 Answer Generation**: Tạo câu trả lời cuối cùng dựa trên tài liệu hoặc kiến thức chung
 
 ## 🗃️ Cơ Sở Dữ Liệu
 
-Hệ thống sử dụng 4 Pinecone indexes chuyên biệt:
+Hệ thống sử dụng 1 Pinecone index tổng hợp:
 
 | Database | Mô Tả | Nội Dung |
 |----------|-------|----------|
-| 🏫 `retrieve-thong-tin-chung` | Thông tin giới thiệu về HANU | Giới thiệu tổng quan, cơ sở vật chất, đội ngũ |
-| 📋 `retrieve-thong-tin-tuyen-sinh` | Thông tin tuyển sinh 2025 | Điều kiện, thủ tục, ngành học, chỉ tiêu |
-| 📚 `retrieve-thong-tin-lich-su` | Lịch sử HANU | Quá trình hình thành và phát triển |
-| 💰 `retrieve-thong-tin-tai-chinh` | Học phí và hỗ trợ | Chi phí học tập, học bổng, hỗ trợ tài chính |
+| 🎓 `retrieve-hanu-info` | Toàn bộ thông tin về HANU | Thông tin giới thiệu, tuyển sinh, lịch sử, học phí, học bổng và các thông tin khác |
 
 ## 📋 Yêu Cầu Hệ Thống
 
@@ -188,7 +179,7 @@ Truy cập: `http://localhost:8501`
 
 ### Thêm Database Mới
 
-1. **Cập nhật** `config/pinecone_indexes.json`:
+1. **Cập nhật** `config/pinecone_indexes.json` (hiện tại chỉ có 1 database tổng hợp):
 ```json
 {
   "name": "your-new-index-name",
