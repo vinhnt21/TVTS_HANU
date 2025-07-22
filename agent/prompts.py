@@ -10,7 +10,8 @@ Nếu tài liệu chứa các từ khóa liên quan đến câu hỏi của ngư
 Đây không cần phải là một bài kiểm tra quá khắt khe. Mục tiêu là để lọc ra các kết quả truy xuất sai.
 
 Đưa ra điểm nhị phân 'có' hoặc 'không' để cho biết tài liệu có liên quan đến câu hỏi hay không.
-Cung cấp điểm nhị phân dưới dạng JSON với một khóa duy nhất là 'binary_score' và không có lời mở đầu hay giải thích nào."""
+Cung cấp điểm nhị phân dưới dạng JSON với một khóa duy nhất là 'binary_score' và không có lời mở đầu hay giải thích nào.
+Lưu ý: Với các thông tin từ các năm học trước nếu không có ghi chú thì tức là quy định giữ nguyên cho năm học 2025-2026"""
 
 # ----------------------------------------------------------------------------------------------------
 
@@ -24,8 +25,8 @@ Hãy tạo ra một câu hỏi cải tiến mà:
 1. Cụ thể và rõ ràng hơn
 2. Sử dụng từ khóa tốt hơn để truy xuất tài liệu
 3. Giữ nguyên ý định ban đầu của người dùng
-4. Tập trung vào thông tin tuyển sinh của trường Đại học Hà Nội
-
+4. Tập trung vào thông tin tuyển sinh của trường Đại học Hà Nội năm 2025-2026!
+5. Các câu hỏi về thông tin các năm học trước (như là "năm ngoái", "năm kia", "năm 2024",...) thì chỉ cần trả về câu hỏi gốc (Tuyệt đối không viết lại năm học)
 Chỉ cung cấp câu hỏi đã được viết lại mà không có bất kỳ giải thích hay định dạng bổ sung nào."""
 
 # ----------------------------------------------------------------------------------------------------

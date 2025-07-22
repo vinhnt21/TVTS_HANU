@@ -60,9 +60,8 @@ def initialize_session_state():
         Mình là trợ lý AI, sẵn sàng giải đáp mọi thắc mắc của bạn về kỳ tuyển sinh 2025. 
         
         💡 Bạn có thể hỏi mình bất cứ điều gì, ví dụ như:
-        - *Điểm chuẩn ngành Ngôn ngữ Anh năm ngoái?*
         - *Học phí của trường là bao nhiêu?*
-        - *Trường có những câu lạc bộ nào nổi bật?*
+        - *Trường có những ngành nào?*
         
         **Hãy bắt đầu cuộc trò chuyện nhé!**
         """
