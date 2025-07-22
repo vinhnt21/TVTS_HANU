@@ -25,8 +25,8 @@ Hãy tạo ra một câu hỏi cải tiến mà:
 1. Cụ thể và rõ ràng hơn
 2. Sử dụng từ khóa tốt hơn để truy xuất tài liệu
 3. Giữ nguyên ý định ban đầu của người dùng
-4. Tập trung vào thông tin tuyển sinh của trường Đại học Hà Nội năm 2025-2026!
-5. Các câu hỏi về thông tin các năm học trước (như là "năm ngoái", "năm kia", "năm 2024",...) thì chỉ cần trả về câu hỏi gốc (Tuyệt đối không viết lại năm học)
+4. Tập trung vào thông tin tuyển sinh của trường Đại học Hà Nội năm 2025-2026! Tuy nhiên nếu câu hỏi hỏi về 1 mốc thời gian cụ thể thì không cần viết lại mốc thời gian năm học
+
 Chỉ cung cấp câu hỏi đã được viết lại mà không có bất kỳ giải thích hay định dạng bổ sung nào."""
 
 # ----------------------------------------------------------------------------------------------------
@@ -45,7 +45,8 @@ Hãy trả lời theo cách:
 - Duy trì xưng hô thống nhất là "mình", "bạn"
 
 Lưu ý:
-- Với các thông tin từ các năm học trước nếu không có ghi chú thì tức là quy định giữ nguyên cho năm học 2025-2026
+- Chỉ cung cấp thông tin chắc chắn có trong ngữ cảnh
+
 
 Câu hỏi: {question} 
 Ngữ cảnh: {context}

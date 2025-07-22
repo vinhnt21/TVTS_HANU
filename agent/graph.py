@@ -130,17 +130,17 @@ def evaluate_document_relevance(state: AgentState) -> Dict[str, str]:
         try:
             log.information(f"Grading result: {grading_result.content}")
             result_json = json.loads(grading_result.content.replace("```json", "").replace("```", ""))
-            relevance_score = result_json.get("binary_score", "không")
+            relevance_score = result_json.get("binary_score", "no")
         except (json.JSONDecodeError, AttributeError) as e:
             log.error(f"Error parsing grading response: {e}.")
-            if "có" in grading_result.content.lower():
-                relevance_score = "có"
+            if "có" in grading_result.content.lower() or "yes" in grading_result.content.lower():
+                relevance_score = "yes"
             else:
-                relevance_score = "không"
+                relevance_score = "no"
             
         log.information(f"Grading result: {relevance_score}")
         
-        if relevance_score == "yes":
+        if relevance_score == "yes" or relevance_score == "có":
             log.success("Documents are relevant")
             next_node = "generate_final_answer"
         else:
